@@ -1,6 +1,6 @@
 # Logs
-logs
 *.log
+*.log.[0-9]*
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -102,3 +102,23 @@ dist
 
 # TernJS port file
 .tern-port
+
+.venv/
+
+
+### VisualStudioCode ###
+.vscode/*
+
+# Local History for Visual Studio Code
+.history/
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+# Support for Project snippet scope
+!.vscode/*.code-snippets
+
+# Memo for local
+memo.txt
