@@ -84,12 +84,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p style={{ fontSize: "7em", marginTop: `3%`, marginBottom: `3%` }}>
-          🎉 홀인원이벤트 ⛳️
-        </p>
+        <p className="event-title">🎉 홀인원이벤트 ⛳️</p>
         <div style={{ flexGrow: 1 }}>
-          <div style={{ fontSize: "8em" }}>누적금액</div>
-          <div style={{ fontSize: "25em", color: "#ffea00" }}>
+          <div className="event-amount-comment">누적금액</div>
+          <div className="event-amount">
             <NumberFormat
               thousandsGroupStyle="thousand"
               value={totalAmount}

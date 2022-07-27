@@ -16,8 +16,16 @@
   color: #61dafb;
 }
 
-/* Button CSS */
+.event-title {
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
 
+.event-amount {
+  color: #ffea00;
+}
+
+/* Button CSS */
 .buttonGroup {
   display: flex;
   width: 100%;
@@ -40,7 +48,6 @@
   display: inline-block;
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  font-size: 40px;
   font-weight: 600;
   line-height: 20px;
   padding: 6px 16px;
@@ -95,7 +102,6 @@
   display: inline-block;
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  font-size: 40px;
   font-weight: 600;
   line-height: 20px;
   padding: 6px 16px;
@@ -149,7 +155,6 @@
   display: inline-block;
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  font-size: 40px;
   font-weight: 600;
   line-height: 20px;
   padding: 6px 16px;
@@ -186,4 +191,39 @@
 .button-apply:active {
   background-color: #298e89;
   box-shadow: rgba(20, 70, 32, 0.2) 0 1px 0 inset;
+}
+
+@media (min-width: 768px) {
+  .event-title {
+    font-size: calc(1rem + ((1vw - 0.48em) * 8.3333));
+  }
+  .event-amount-comment {
+    font-size: calc(2rem + ((1vw - 0.48em) * 8.3333));
+  }
+  .event-amount {
+    font-size: calc(5rem + ((1vw - 7.68px) * 22.7778));
+  }
+
+  .button-increase,
+  .button-decrease,
+  .button-apply {
+    font-size: calc(1.5rem + ((1vw - 7.68px) * 1.3889));
+  }
+}
+
+@media (min-width: 1920px) {
+  .event-title {
+    font-size: 7em;
+  }
+  .event-amount-comment {
+    font-size: 8em;
+  }
+  .event-amount {
+    font-size: 400px;
+  }
+  .button-increase,
+  .button-decrease,
+  .button-apply {
+    font-size: 40px;
+  }
 }
