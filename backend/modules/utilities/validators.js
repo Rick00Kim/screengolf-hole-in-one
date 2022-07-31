@@ -18,18 +18,22 @@ const validate = (req, res, next) => {
 };
 
 // Each validation rules
-const menuValidationRules = () => {
+const paramIdValidationRules = () => {
+  return [param("id").notEmpty().withMessage("ID can not be null")];
+};
+
+const bodyChangeHistoryValidationRules = () => {
   return [
-    param("id").notEmpty().withMessage("ID can not be null"),
-    body("name").notEmpty().withMessage("NAME can not be null"),
-    body("amount")
+    body("prizeId").notEmpty().withMessage("PRIZE_ID can not be null"),
+    body("changePrice")
       .notEmpty()
-      .withMessage("AMOUNT can not be null")
+      .withMessage("CHANGE_PRICE can not be null")
       .isNumeric()
-      .withMessage("AMOUNT should be number"),
+      .withMessage("CHANGE_PRICE should be number"),
   ];
 };
 
 validators.CommonValidate = validate;
+validators.BodyChangeHistoryValidationRules = bodyChangeHistoryValidationRules;
 
 module.exports = validators;

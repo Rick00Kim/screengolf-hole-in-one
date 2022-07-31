@@ -10,5 +10,5 @@ module.exports = (mongoose) => {
       { timestamps: true }
     )
   );
-  return Order;
+  return ChangeHistory;
 };
