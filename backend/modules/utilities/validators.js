@@ -22,6 +22,17 @@ const paramIdValidationRules = () => {
   return [param("id").notEmpty().withMessage("ID can not be null")];
 };
 
+const prizeDataPostValidationRule = () => {
+  return [
+    body("id").notEmpty().withMessage("ID can not be null"),
+    body("changePrice")
+      .notEmpty()
+      .withMessage("CHANGE_PRICE can not be null")
+      .isNumeric()
+      .withMessage("CHANGE_PRICE should be number"),
+  ];
+};
+
 const bodyChangeHistoryValidationRules = () => {
   return [
     body("prizeId").notEmpty().withMessage("PRIZE_ID can not be null"),
@@ -34,6 +45,8 @@ const bodyChangeHistoryValidationRules = () => {
 };
 
 validators.CommonValidate = validate;
+validators.ParamIdValidationRules = paramIdValidationRules;
+validators.PrizeDataPostValidationRule = prizeDataPostValidationRule;
 validators.BodyChangeHistoryValidationRules = bodyChangeHistoryValidationRules;
 
 module.exports = validators;
