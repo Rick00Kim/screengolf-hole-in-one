@@ -22,9 +22,9 @@ const paramIdValidationRules = () => {
   return [param("id").notEmpty().withMessage("ID can not be null")];
 };
 
-const prizeDataPostValidationRule = () => {
+const createValidationRule = () => {
   return [
-    body("id").notEmpty().withMessage("ID can not be null"),
+    param("id").notEmpty().withMessage("ID can not be null"),
     body("changePrice")
       .notEmpty()
       .withMessage("CHANGE_PRICE can not be null")
@@ -33,9 +33,9 @@ const prizeDataPostValidationRule = () => {
   ];
 };
 
-const bodyChangeHistoryValidationRules = () => {
+const modifyValidationRules = () => {
   return [
-    body("prizeId").notEmpty().withMessage("PRIZE_ID can not be null"),
+    param("id").notEmpty().withMessage("ID can not be null"),
     body("changePrice")
       .notEmpty()
       .withMessage("CHANGE_PRICE can not be null")
@@ -46,7 +46,7 @@ const bodyChangeHistoryValidationRules = () => {
 
 validators.CommonValidate = validate;
 validators.ParamIdValidationRules = paramIdValidationRules;
-validators.PrizeDataPostValidationRule = prizeDataPostValidationRule;
-validators.BodyChangeHistoryValidationRules = bodyChangeHistoryValidationRules;
+validators.CreateValidationRule = createValidationRule;
+validators.ModifyValidationRules = modifyValidationRules;
 
 module.exports = validators;
