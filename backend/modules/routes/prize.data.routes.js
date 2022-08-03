@@ -37,5 +37,5 @@ module.exports = (app) => {
     orderController.update
   );
 
-  app.use("/api/order", router);
+  app.use("/api/prize-data", router);
 };
