@@ -6,8 +6,8 @@ module.exports = (mongoose) => {
         id: String,
         initPrice: { type: Number },
         currentPrice: { type: Number },
-        participantCnt: { type: Number },
-        finishedFlg: { type: Boolean },
+        participantCnt: { type: Number, default: 0 },
+        finishedFlg: { type: Boolean, default: false },
       },
       { timestamps: true }
     )
