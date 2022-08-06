@@ -48,7 +48,7 @@ exports.findOne = (req, res) => {
 };
 
 // Update a Price data by the id in the request
-exports.update = (req, res) => {
+exports.update = async (req, res) => {
   if (!req.body) {
     return res.status(400).send({
       result: "FAIL",
@@ -58,7 +58,7 @@ exports.update = (req, res) => {
 
   const id = req.params.id;
 
-  Menu.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+  PriceData.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
     .then((data) => {
       if (!data) {
         res.status(404).send({
@@ -75,32 +75,6 @@ exports.update = (req, res) => {
       res.status(500).send({
         result: "FAIL",
         message: "Error updating Menu with id=" + id,
-      });
-    });
-};
-
-// Delete a Price data with the specified id in the request
-exports.delete = (req, res) => {
-  const id = req.params.id;
-
-  Menu.findByIdAndRemove(id, { useFindAndModify: false })
-    .then((data) => {
-      if (!data) {
-        res.status(404).send({
-          result: "FAIL",
-          message: `Cannot delete Menu with id=${id}. Maybe Menu was not found!`,
-        });
-      } else {
-        res.send({
-          result: "SUCCESS",
-          message: "Menu was deleted successfully!",
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        result: "FAIL",
-        message: `Could not delete Menu with id=${id}`,
       });
     });
 };
