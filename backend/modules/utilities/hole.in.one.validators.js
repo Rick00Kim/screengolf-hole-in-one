@@ -25,11 +25,11 @@ const paramIdValidationRules = () => {
 const createValidationRule = () => {
   return [
     param("id").notEmpty().withMessage("ID can not be null"),
-    body("changePrice")
+    body("initPrice")
       .notEmpty()
-      .withMessage("CHANGE_PRICE can not be null")
+      .withMessage("INIT_PRICE can not be null")
       .isNumeric()
-      .withMessage("CHANGE_PRICE should be number"),
+      .withMessage("INIT_PRICE should be number"),
   ];
 };
 

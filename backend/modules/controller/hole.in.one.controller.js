@@ -1,45 +1,21 @@
 const db = require("../models");
 const PriceData = db.priceData;
+const ChangeHistory = db.changeHistory;
 
 // Create and Save a new price data.
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   // Get name from request parameters for check
-  const name = req.body.name;
-  // Validate existing data from request
-  PriceData.find({ name: name }, function (err, result) {
-    if (err) {
-      return res.json(err);
-    } else {
-      if (result.length !== 0) {
-        return res.status(200).json({
-          result: "FAIL",
-          message: `Regular Name(${name}) is already exists.`,
-        });
-      } else {
-        // Create a Regular
-        const priceData = new PriceData({
-          name: name,
-          number: req.body.number,
-          key: req.body.key,
-          amount: req.body.amount,
-        });
+  const initPrice = req.body.initPrice;
 
-        // Save Regular in the database
-        priceData
-          .save()
-          .then((data) => {
-            res.send(data);
-          })
-          .catch((err) => {
-            res.status(500).send({
-              result: "FAIL",
-              message:
-                err.message ||
-                "Some error occurred while creating the Regular data.",
-            });
-          });
-      }
-    }
+  // Create a Price data
+  const priceData = new PriceData({
+    initPrice: initPrice,
+    currentPrice: initPrice,
+  });
+
+  // Save Price data
+  await priceData.save().then((data) => {
+    res.send(data);
   });
 };
 
