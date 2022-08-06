@@ -35,7 +35,7 @@ exports.findAll = (req, res) => {
 // Find a specific Price datas with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
-  Menu.findById(id)
+  PriceData.findById(id)
     .then((data) => {
       res.send(data);
     })
