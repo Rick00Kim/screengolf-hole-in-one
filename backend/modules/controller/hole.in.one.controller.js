@@ -19,7 +19,7 @@ exports.create = async (req, res) => {
   });
 };
 
-// Retrieve all menus.
+// Retrieve all Price datas.
 exports.findAll = (req, res) => {
   PriceData.find()
     .then((data) => {
@@ -32,7 +32,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Find a specific menu with an id
+// Find a specific Price datas with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
   Menu.findById(id)
@@ -47,7 +47,7 @@ exports.findOne = (req, res) => {
     });
 };
 
-// Update a menu by the id in the request
+// Update a Price data by the id in the request
 exports.update = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
@@ -79,7 +79,7 @@ exports.update = (req, res) => {
     });
 };
 
-// Delete a menu with the specified id in the request
+// Delete a Price data with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
 
