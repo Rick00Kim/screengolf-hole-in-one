@@ -21,7 +21,7 @@ exports.create = async (req, res) => {
 
 // Retrieve all menus.
 exports.findAll = (req, res) => {
-  Menu.find()
+  PriceData.find()
     .then((data) => {
       res.send(data);
     })
