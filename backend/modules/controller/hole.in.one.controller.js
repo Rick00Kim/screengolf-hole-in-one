@@ -1,5 +1,5 @@
 const db = require("../models");
-const PriceData = db.priceData;
+const PrizeData = db.prizeData;
 const ChangeHistory = db.changeHistory;
 
 // Create and Save a new price data.
@@ -8,7 +8,7 @@ exports.create = async (req, res) => {
   const initPrice = req.body.initPrice;
 
   // Create a Price data
-  const priceData = new PriceData({
+  const priceData = new PrizeData({
     initPrice: initPrice,
     currentPrice: initPrice,
   });
@@ -21,7 +21,7 @@ exports.create = async (req, res) => {
 
 // Retrieve all Price datas.
 exports.findAll = (req, res) => {
-  PriceData.find()
+  PrizeData.find()
     .then((data) => {
       res.send(data);
     })
@@ -35,7 +35,7 @@ exports.findAll = (req, res) => {
 // Find a specific Price datas with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
-  PriceData.findById(id)
+  PrizeData.findById(id)
     .then((data) => {
       res.send(data);
     })
@@ -56,25 +56,51 @@ exports.update = async (req, res) => {
     });
   }
 
+  // Get id from request
   const id = req.params.id;
+  // Validate data
+  const targetPrizeData = await PrizeData.findById(id);
+  if (!targetPrizeData) {
+    return res.status(404).send({
+      result: "FAIL",
+      message: "Praice data is not found",
+    });
+  }
 
-  PriceData.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+  // Get changed price from request body
+  const changePrice = req.body.changePrice;
+
+  const updatedPrize = {
+    currentPrice: targetPrizeData.currentPrice + changePrice,
+    participantCnt: targetPrizeData.participantCnt + 1,
+  };
+
+  const changeHistory = new ChangeHistory({
+    prizeId: id,
+    changePrice: changePrice,
+  });
+
+  await changeHistory.save();
+
+  await PrizeData.findByIdAndUpdate(id, updatedPrize, {
+    useFindAndModify: false,
+  })
     .then((data) => {
       if (!data) {
         res.status(404).send({
           result: "FAIL",
-          message: `Cannot update Menu with id=${id}. Maybe Menu was not found!`,
+          message: `Cannot update Prize Data with id=${id}. Maybe Prize Data was not found!`,
         });
       } else
         res.send({
           result: "SUCCESS",
-          message: "Menu was updated successfully.",
+          message: "Prize Data was updated successfully.",
         });
     })
     .catch((err) => {
       res.status(500).send({
         result: "FAIL",
-        message: "Error updating Menu with id=" + id,
+        message: "Error updating Prize Data with id=" + id,
       });
     });
 };
