@@ -49,6 +49,7 @@ exports.findOne = (req, res) => {
 
 // Update a Price data by the id in the request
 exports.update = async (req, res) => {
+  // Validate requests
   if (!req.body) {
     return res.status(400).send({
       result: "FAIL",
@@ -70,17 +71,19 @@ exports.update = async (req, res) => {
   // Get changed price from request body
   const changePrice = req.body.changePrice;
 
-  const updatedPrize = {
-    currentPrice: targetPrizeData.currentPrice + changePrice,
-    participantCnt: targetPrizeData.participantCnt + 1,
-  };
-
+  // Save change history
   const changeHistory = new ChangeHistory({
     prizeId: id,
     changePrice: changePrice,
   });
 
   await changeHistory.save();
+
+  // Update Prize data
+  const updatedPrize = {
+    currentPrice: targetPrizeData.currentPrice + changePrice,
+    participantCnt: targetPrizeData.participantCnt + 1,
+  };
 
   await PrizeData.findByIdAndUpdate(id, updatedPrize, {
     useFindAndModify: false,
