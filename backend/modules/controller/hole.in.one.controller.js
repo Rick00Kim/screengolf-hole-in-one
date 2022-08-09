@@ -32,6 +32,20 @@ exports.findAll = (req, res) => {
     });
 };
 
+// Find a latest holeInOne data.
+exports.findLatest = (req, res) => {
+  PrizeData.findById(id)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        result: "FAIL",
+        message: err.message,
+      });
+    });
+};
+
 // Find a specific Price datas with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
@@ -71,12 +85,13 @@ exports.update = async (req, res) => {
   // Get changed price from request body
   const changePrice = req.body.changePrice;
 
-  // Save change history
+  // Create change history object
   const changeHistory = new ChangeHistory({
     prizeId: id,
     changePrice: changePrice,
   });
 
+  // Save change history object
   await changeHistory.save();
 
   // Update Prize data

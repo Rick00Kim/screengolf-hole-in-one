@@ -24,7 +24,6 @@ const paramIdValidationRules = () => {
 
 const createValidationRule = () => {
   return [
-    param("id").notEmpty().withMessage("ID can not be null"),
     body("initPrice")
       .notEmpty()
       .withMessage("INIT_PRICE can not be null")

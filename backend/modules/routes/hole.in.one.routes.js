@@ -22,6 +22,9 @@ module.exports = (app) => {
   // Retrieve all holeInOne datas.
   router.get("/", holeInOneController.findAll);
 
+  // Find a latest holeInOne data.
+  router.get("/latest", holeInOneController.findLatest);
+
   // Find a specific holeInOne data with an id
   router.get(
     "/:id",

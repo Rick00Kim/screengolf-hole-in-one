@@ -36,8 +36,7 @@ app.get("/", (req, res) => {
 });
 
 // Import routes
-require("./modules/routes/prize.data.routes")(app);
-require("./modules/routes/change.history.routes")(app);
+require("./modules/routes/hole.in.one.routes")(app);
 
 // Set port
 const PORT = process.env.PORT || 3300;
