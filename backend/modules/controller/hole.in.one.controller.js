@@ -2,24 +2,24 @@ const db = require("../models");
 const PrizeData = db.prizeData;
 const ChangeHistory = db.changeHistory;
 
-// Create and Save a new price data.
+// Create and Save a new holeInOne data.
 exports.create = async (req, res) => {
   // Get name from request parameters for check
   const initPrice = req.body.initPrice;
 
-  // Create a Price data
-  const priceData = new PrizeData({
+  // Create a Prize data
+  const prizeData = new PrizeData({
     initPrice: initPrice,
     currentPrice: initPrice,
   });
 
-  // Save Price data
-  await priceData.save().then((data) => {
+  // Save Prize data
+  await prizeData.save().then((data) => {
     res.send(data);
   });
 };
 
-// Retrieve all Price datas.
+// Retrieve all holeInOne datas.
 exports.findAll = (req, res) => {
   PrizeData.find()
     .then((data) => {
@@ -46,7 +46,7 @@ exports.findLatest = (req, res) => {
     });
 };
 
-// Find a specific Price datas with an id
+// Find a specific Prize datas with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
   PrizeData.findById(id)
@@ -61,7 +61,7 @@ exports.findOne = (req, res) => {
     });
 };
 
-// Update a Price data by the id in the request
+// Update a Prize data by the id in the request
 exports.update = async (req, res) => {
   // Validate requests
   if (!req.body) {
