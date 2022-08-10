@@ -34,7 +34,7 @@ exports.findAll = (req, res) => {
 
 // Find a latest holeInOne data.
 exports.findLatest = (req, res) => {
-  PrizeData.findById(id)
+  PrizeData.find()
     .then((data) => {
       res.send(data);
     })
