@@ -41,5 +41,13 @@ module.exports = (app) => {
     holeInOneController.update
   );
 
+  // Confirm a specific Prize data
+  router.put(
+    "/:id/confirm",
+    ParamIdValidationRules(),
+    CommonValidate,
+    holeInOneController.confirm
+  );
+
   app.use("/api/hole-in-one", router);
 };
