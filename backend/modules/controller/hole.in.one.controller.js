@@ -36,9 +36,9 @@ exports.findAll = (req, res) => {
 exports.findLatest = (req, res) => {
   PrizeData.find()
     .sort({ createdAt: -1 })
-    .limit(10)
+    .limit(1)
     .then((data) => {
-      res.send(data);
+      res.send(data[0]);
     })
     .catch((err) => {
       res.status(500).send({
