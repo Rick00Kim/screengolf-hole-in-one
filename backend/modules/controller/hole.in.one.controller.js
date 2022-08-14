@@ -34,6 +34,7 @@ exports.findAll = (req, res) => {
 
 // Find a latest holeInOne data.
 exports.findLatest = (req, res) => {
+  // Get latest Prize data
   PrizeData.find({ finishedFlg: false })
     .sort({ createdAt: -1 })
     .limit(1)
@@ -50,7 +51,10 @@ exports.findLatest = (req, res) => {
 
 // Find a specific Prize datas with an id
 exports.findOne = (req, res) => {
+  // Get id from request
   const id = req.params.id;
+
+  // Get Prize data by id
   PrizeData.findById(id)
     .then((data) => {
       res.send(data);
@@ -75,6 +79,7 @@ exports.update = async (req, res) => {
 
   // Get id from request
   const id = req.params.id;
+
   // Validate data
   const targetPrizeData = await PrizeData.findById(id);
   if (!targetPrizeData) {
@@ -102,6 +107,7 @@ exports.update = async (req, res) => {
     participantCnt: targetPrizeData.participantCnt + 1,
   };
 
+  // Update Prize data by id
   await PrizeData.findByIdAndUpdate(id, updatedPrize, {
     useFindAndModify: false,
   })
@@ -127,7 +133,9 @@ exports.update = async (req, res) => {
 
 // Confirm a specific Prize data
 exports.confirm = async (req, res) => {
+  // Get id from request
   const id = req.params.id;
+  // Update Prize data by id
   await PrizeData.findByIdAndUpdate(id, { finishedFlg: true })
     .then((data) => {
       res.send(data);
