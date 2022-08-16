@@ -5,16 +5,19 @@ import "./App.css";
 
 function App() {
   const [totalAmount, setTotalAmount] = React.useState(5000000);
+  const [changedPrice, setChangedPrice] = React.useState(0);
   const [changeMode, setChangeMode] = React.useState(false);
   const [auth, setAuth] = React.useState(false);
 
   const handleChange = (targetAmount) => {
     setTotalAmount(totalAmount + targetAmount);
+    setChangedPrice(changedPrice + targetAmount);
   };
 
-  const resetChangeMode = () => {
+  const submitPrice = () => {
     setAuth(false);
     setChangeMode(false);
+    console.log(changedPrice);
   };
 
   const defaultGroup = () => {
@@ -72,7 +75,7 @@ function App() {
           <button
             className="button-apply"
             type="button"
-            onClick={(e) => resetChangeMode()}
+            onClick={(e) => submitPrice()}
           >
             변경내용적용
           </button>
