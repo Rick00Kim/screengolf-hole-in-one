@@ -18,6 +18,7 @@ function App() {
     setAuth(false);
     setChangeMode(false);
     console.log(changedPrice);
+    setChangedPrice(0);
   };
 
   const defaultGroup = () => {
