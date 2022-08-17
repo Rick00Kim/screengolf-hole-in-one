@@ -1,24 +1,50 @@
 import * as React from "react";
 import NumberFormat from "react-number-format";
 import AuthForm from "./AuthForm";
+import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [totalAmount, setTotalAmount] = React.useState(5000000);
-  const [changedPrice, setChangedPrice] = React.useState(0);
-  const [changeMode, setChangeMode] = React.useState(false);
   const [auth, setAuth] = React.useState(false);
+  const [prizeId, setPrizeId] = React.useState(null);
+  const [currentAmount, setCurrentAmount] = React.useState(5000000);
+  const [changePrice, setChangePrice] = React.useState(0);
+  const [changeMode, setChangeMode] = React.useState(false);
+
+  React.useEffect(() => {
+    axios
+      .get("/api/hole-in-one/latest")
+      .then((res) => setPrizeId(res.data._id))
+      .catch((err) => console.log(err));
+  }, []);
 
   const handleChange = (targetAmount) => {
-    setTotalAmount(totalAmount + targetAmount);
-    setChangedPrice(changedPrice + targetAmount);
+    setCurrentAmount(currentAmount + targetAmount);
+    setChangePrice(changePrice + targetAmount);
   };
 
   const submitPrice = () => {
-    setAuth(false);
-    setChangeMode(false);
-    console.log(changedPrice);
-    setChangedPrice(0);
+    // Create Post data
+    const postData = {
+      changePrice: changePrice,
+    };
+
+    // Call Backend API for updating prize data
+    axios
+      .put(`/api/hole-in-one/${prizeId}`, postData)
+      .then((res) => {
+        if (res.result === "SUCCESS") {
+          // Set updated amount
+          setCurrentAmount(res.data.updatedAmount);
+          // Reset All state variables
+          setAuth(false);
+          setChangeMode(false);
+          setChangePrice(0);
+        } else setCurrentAmount(currentAmount);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   const defaultGroup = () => {
@@ -94,7 +120,7 @@ function App() {
           <div className="event-amount">
             <NumberFormat
               thousandsGroupStyle="thousand"
-              value={totalAmount}
+              value={currentAmount}
               decimalSeparator="."
               displayType="text"
               type="text"
