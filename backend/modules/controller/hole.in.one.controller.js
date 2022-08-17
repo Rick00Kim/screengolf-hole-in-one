@@ -121,6 +121,7 @@ exports.update = async (req, res) => {
         res.send({
           result: "SUCCESS",
           message: "Prize Data was updated successfully.",
+          updatedAmount: data.currentPrice,
         });
     })
     .catch((err) => {
