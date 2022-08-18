@@ -109,20 +109,25 @@ exports.update = async (req, res) => {
 
   // Update Prize data by id
   await PrizeData.findByIdAndUpdate(id, updatedPrize, {
-    useFindAndModify: false,
-  })
+    useFindAndModify: true,
+  });
+
+  // Get Prize data by id
+  await PrizeData.findById(id)
     .then((data) => {
       if (!data) {
         res.status(404).send({
           result: "FAIL",
           message: `Cannot update Prize Data with id=${id}. Maybe Prize Data was not found!`,
         });
-      } else
+      } else {
+        console.log(data);
         res.send({
           result: "SUCCESS",
           message: "Prize Data was updated successfully.",
           updatedAmount: data.currentPrice,
         });
+      }
     })
     .catch((err) => {
       res.status(500).send({
