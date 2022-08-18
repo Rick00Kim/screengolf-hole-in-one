@@ -7,14 +7,17 @@ import "./App.css";
 function App() {
   const [auth, setAuth] = React.useState(false);
   const [prizeId, setPrizeId] = React.useState(null);
-  const [currentAmount, setCurrentAmount] = React.useState(5000000);
+  const [currentAmount, setCurrentAmount] = React.useState(0);
   const [changePrice, setChangePrice] = React.useState(0);
   const [changeMode, setChangeMode] = React.useState(false);
 
   React.useEffect(() => {
     axios
       .get("/api/hole-in-one/latest")
-      .then((res) => setPrizeId(res.data._id))
+      .then((res) => {
+        setPrizeId(res.data._id);
+        setCurrentAmount(res.data.currentPrice);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -33,7 +36,7 @@ function App() {
     axios
       .put(`/api/hole-in-one/${prizeId}`, postData)
       .then((res) => {
-        if (res.result === "SUCCESS") {
+        if (res.data.result === "SUCCESS") {
           // Set updated amount
           setCurrentAmount(res.data.updatedAmount);
           // Reset All state variables
