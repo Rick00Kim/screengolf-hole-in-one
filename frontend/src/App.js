@@ -29,6 +29,8 @@ function App() {
   };
 
   const submitPrice = () => {
+    // Return function, when not chnaged
+    if (changePrice === 0) return;
     // Create Post data
     const postData = {
       changePrice: changePrice,
@@ -77,6 +79,36 @@ function App() {
           <button
             className="button-increase"
             type="button"
+            onClick={(e) => handleChange(100000)}
+          >
+            + 10만원
+          </button>
+          <button
+            className="button-decrease"
+            type="button"
+            onClick={(e) => handleChange(-100000)}
+          >
+            - 10만원
+          </button>
+          <button
+            className="button-increase"
+            type="button"
+            onClick={(e) => handleChange(50000)}
+          >
+            + 5만원
+          </button>
+          <button
+            className="button-decrease"
+            type="button"
+            onClick={(e) => handleChange(-50000)}
+          >
+            - 5만원
+          </button>
+        </div>
+        <div className="buttonGroup">
+          <button
+            className="button-increase"
+            type="button"
             onClick={(e) => handleChange(10000)}
           >
             + 1만원
@@ -100,7 +132,7 @@ function App() {
             type="button"
             onClick={(e) => handleChange(-1000)}
           >
-            - 천원
+            - 1천원
           </button>
         </div>
         <div className="buttonGroup">
