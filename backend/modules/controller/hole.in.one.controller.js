@@ -39,7 +39,10 @@ exports.findLatest = (req, res) => {
     .sort({ createdAt: -1 })
     .limit(1)
     .then((data) => {
-      res.send(data[0]);
+      res.send({
+        result: "SUCCESS",
+        content: data[0],
+      });
     })
     .catch((err) => {
       res.status(500).send({

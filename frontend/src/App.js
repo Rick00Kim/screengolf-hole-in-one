@@ -6,17 +6,19 @@ import "./App.css";
 
 function App() {
   const [auth, setAuth] = React.useState(false);
+  const [changeMode, setChangeMode] = React.useState(false);
   const [prizeId, setPrizeId] = React.useState(null);
   const [currentAmount, setCurrentAmount] = React.useState(0);
   const [changePrice, setChangePrice] = React.useState(0);
-  const [changeMode, setChangeMode] = React.useState(false);
 
   React.useEffect(() => {
+    // Get latest prize data from backend
     axios
       .get("/api/hole-in-one/latest")
       .then((res) => {
-        setPrizeId(res.data._id);
-        setCurrentAmount(res.data.currentPrice);
+        const { content } = res.data;
+        setPrizeId(content._id);
+        setCurrentAmount(content.currentPrice);
       })
       .catch((err) => console.log(err));
   }, []);
