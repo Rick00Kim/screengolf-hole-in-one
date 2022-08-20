@@ -121,7 +121,6 @@ exports.update = async (req, res) => {
           message: `Cannot update Prize Data with id=${id}. Maybe Prize Data was not found!`,
         });
       } else {
-        console.log(data);
         res.send({
           result: "SUCCESS",
           message: "Prize Data was updated successfully.",
