@@ -2,6 +2,7 @@ import * as React from "react";
 import NumberFormat from "react-number-format";
 import AuthForm from "./AuthForm";
 import axios from "axios";
+import { backendResultCodes } from "./Constants";
 import "./App.css";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
   const [prizeId, setPrizeId] = React.useState(null);
   const [currentAmount, setCurrentAmount] = React.useState(0);
   const [changePrice, setChangePrice] = React.useState(0);
+  const [initFlag, setInitFlag] = React.useState(false);
 
   React.useEffect(() => {
     // Get latest prize data from backend
@@ -17,8 +19,13 @@ function App() {
       .get("/api/hole-in-one/latest")
       .then((res) => {
         const { content } = res.data;
-        setPrizeId(content._id);
-        setCurrentAmount(content.currentPrice);
+        if (content === undefined) {
+          setInitFlag(true);
+        } else {
+          setPrizeId(content._id);
+          setCurrentAmount(content.currentPrice);
+          setInitFlag(false);
+        }
       })
       .catch((err) => console.log(err));
   }, []);
@@ -31,27 +38,54 @@ function App() {
   const submitPrice = () => {
     // Return function, when not chnaged
     if (changePrice === 0) return;
-    // Create Post data
-    const postData = {
-      changePrice: changePrice,
-    };
 
-    // Call Backend API for updating prize data
-    axios
-      .put(`/api/hole-in-one/${prizeId}`, postData)
-      .then((res) => {
-        if (res.data.result === "SUCCESS") {
-          // Set updated amount
-          setCurrentAmount(res.data.updatedAmount);
-          // Reset All state variables
-          setAuth(false);
-          setChangeMode(false);
-          setChangePrice(0);
-        } else setCurrentAmount(currentAmount);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    if (initFlag) {
+      const postData = {
+        initPrice: changePrice,
+      };
+      // Call Backend API for updating prize data
+      axios
+        .post(`/api/hole-in-one`, postData)
+        .then((res) => {
+          const responseData = res.data;
+          if (responseData.result === backendResultCodes.SUCCESS) {
+            // Set init amount
+            setCurrentAmount(responseData.content.currentPrice);
+            // Reset All state variables
+            setAuth(false);
+            setChangeMode(false);
+            setChangePrice(0);
+            setInitFlag(false);
+            setPrizeId(responseData.content._id);
+          } else setCurrentAmount(currentAmount);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } else {
+      // Create Put data
+      const putData = {
+        changePrice: changePrice,
+      };
+
+      // Call Backend API for updating prize data
+      axios
+        .put(`/api/hole-in-one/${prizeId}`, putData)
+        .then((res) => {
+          const responseData = res.data;
+          if (responseData.result === backendResultCodes.SUCCESS) {
+            // Set updated amount
+            setCurrentAmount(responseData.updatedAmount);
+            // Reset All state variables
+            setAuth(false);
+            setChangeMode(false);
+            setChangePrice(0);
+          } else setCurrentAmount(currentAmount);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
   };
 
   const defaultGroup = () => {
@@ -62,7 +96,7 @@ function App() {
           type="button"
           onClick={(e) => setChangeMode(true)}
         >
-          누적금액변경
+          {initFlag ? "초기금액설정" : "누적금액변경"}
         </button>
       </div>
     );
@@ -75,36 +109,40 @@ function App() {
   const amountButtonActive = () => {
     return (
       <React.Fragment>
-        <div className="buttonGroup">
-          <button
-            className="button-increase"
-            type="button"
-            onClick={(e) => handleChange(100000)}
-          >
-            + 10만원
-          </button>
-          <button
-            className="button-decrease"
-            type="button"
-            onClick={(e) => handleChange(-100000)}
-          >
-            - 10만원
-          </button>
-          <button
-            className="button-increase"
-            type="button"
-            onClick={(e) => handleChange(50000)}
-          >
-            + 5만원
-          </button>
-          <button
-            className="button-decrease"
-            type="button"
-            onClick={(e) => handleChange(-50000)}
-          >
-            - 5만원
-          </button>
-        </div>
+        {initFlag ? (
+          <div className="buttonGroup">
+            <button
+              className="button-increase"
+              type="button"
+              onClick={(e) => handleChange(100000)}
+            >
+              + 10만원
+            </button>
+            <button
+              className="button-decrease"
+              type="button"
+              onClick={(e) => handleChange(-100000)}
+            >
+              - 10만원
+            </button>
+            <button
+              className="button-increase"
+              type="button"
+              onClick={(e) => handleChange(50000)}
+            >
+              + 5만원
+            </button>
+            <button
+              className="button-decrease"
+              type="button"
+              onClick={(e) => handleChange(-50000)}
+            >
+              - 5만원
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
         <div className="buttonGroup">
           <button
             className="button-increase"
@@ -141,10 +179,50 @@ function App() {
             type="button"
             onClick={(e) => submitPrice()}
           >
-            변경내용적용
+            {initFlag ? "홀인원이벤트시작" : "변경내용적용"}
           </button>
         </div>
       </React.Fragment>
+    );
+  };
+
+  const initPrizeLayout = () => {
+    return (
+      <div style={{ flexGrow: 1 }}>
+        <div className="event-amount-comment">초기금액설정</div>
+        <div className="event-amount">
+          <NumberFormat
+            thousandsGroupStyle="thousand"
+            value={currentAmount}
+            decimalSeparator="."
+            displayType="text"
+            type="text"
+            thousandSeparator={true}
+            allowNegative={true}
+          />
+          원
+        </div>
+      </div>
+    );
+  };
+
+  const processPrizeLayout = () => {
+    return (
+      <div style={{ flexGrow: 1 }}>
+        <div className="event-amount-comment">누적금액</div>
+        <div className="event-amount">
+          <NumberFormat
+            thousandsGroupStyle="thousand"
+            value={currentAmount}
+            decimalSeparator="."
+            displayType="text"
+            type="text"
+            thousandSeparator={true}
+            allowNegative={true}
+          />
+          원
+        </div>
+      </div>
     );
   };
 
@@ -152,21 +230,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p className="event-title">🎉 홀인원이벤트 ⛳️</p>
-        <div style={{ flexGrow: 1 }}>
-          <div className="event-amount-comment">누적금액</div>
-          <div className="event-amount">
-            <NumberFormat
-              thousandsGroupStyle="thousand"
-              value={currentAmount}
-              decimalSeparator="."
-              displayType="text"
-              type="text"
-              thousandSeparator={true}
-              allowNegative={true}
-            />
-            원
-          </div>
-        </div>
+        {initFlag ? initPrizeLayout() : processPrizeLayout()}
         {changeMode ? authIndex() : defaultGroup()}
       </header>
     </div>
