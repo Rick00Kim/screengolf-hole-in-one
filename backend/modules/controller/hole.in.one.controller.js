@@ -14,8 +14,11 @@ exports.create = async (req, res) => {
   });
 
   // Save Prize data
-  await prizeData.save().then((data) => {
-    res.send(data);
+  prizeData.save().then((data) => {
+    res.send({
+      result: "SUCCESS",
+      content: data,
+    });
   });
 };
 
