@@ -21,8 +21,13 @@
   margin-bottom: 3%;
 }
 
-.event-amount {
+.event-amount,
+.event-amount-init {
   color: #ffea00;
+}
+
+.event-amount-initComment {
+  color: #e29e22;
 }
 
 /* Button CSS */
@@ -200,6 +205,12 @@
   .event-amount-comment {
     font-size: calc(2rem + ((1vw - 0.48em) * 8.3333));
   }
+  .event-amount-initComment {
+    font-size: calc(2rem + ((1vw - 0.48em) * 7.3333));
+  }
+  .event-amount-init {
+    font-size: calc(2rem + ((1vw - 0.48em) * 7.3333));
+  }
   .event-amount {
     font-size: calc(5rem + ((1vw - 7.68px) * 22.7778));
   }
@@ -217,6 +228,12 @@
   }
   .event-amount-comment {
     font-size: 8em;
+  }
+  .event-amount-initComment {
+    font-size: 3em;
+  }
+  .event-amount-init {
+    font-size: 5em;
   }
   .event-amount {
     font-size: 400px;
