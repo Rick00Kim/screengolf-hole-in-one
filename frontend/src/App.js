@@ -43,7 +43,7 @@ function App() {
       const postData = {
         initPrice: changePrice,
       };
-      // Call Backend API for updating prize data
+      // Call Backend API for creating new prize data
       axios
         .post(`/api/hole-in-one`, postData)
         .then((res) => {
