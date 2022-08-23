@@ -37,7 +37,11 @@ function App() {
 
   const submitPrice = () => {
     // Return function, when not chnaged
-    if (changePrice === 0) return;
+    if (changePrice === 0) {
+      setAuth(false);
+      setChangeMode(false);
+      return;
+    }
 
     if (initFlag) {
       const postData = {
