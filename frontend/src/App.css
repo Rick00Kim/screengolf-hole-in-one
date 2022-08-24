@@ -24,6 +24,22 @@
 .event-amount,
 .event-amount-init {
   color: #ffea00;
+  background-image: linear-gradient(
+    -200deg,
+    #e3f258 0%,
+    #ff8d60 29%,
+    #e34b21 65%,
+    #e3f258 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 1.8s linear infinite;
+  display: inline-block;
 }
 
 .event-amount-initComment {
@@ -242,5 +258,11 @@
   .button-decrease,
   .button-apply {
     font-size: 40px;
+  }
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
   }
 }
