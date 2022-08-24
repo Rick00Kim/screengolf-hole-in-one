@@ -3,7 +3,7 @@ import "./AuthForm.css";
 
 function AuthForm(props) {
   // Controller from parent
-  const { authControl } = props;
+  const { authControl, modeControl } = props;
 
   // React States
   const [errorMessages, setErrorMessages] = React.useState({});
@@ -16,6 +16,11 @@ function AuthForm(props) {
 
   const errors = {
     password: "관리자 비밀번호가 다릅니다.",
+  };
+
+  const handleCancel = () => {
+    authControl(false);
+    modeControl(false);
   };
 
   const handleSubmit = (event) => {
@@ -54,7 +59,12 @@ function AuthForm(props) {
           />
         </div>
         <input className="button-submit" type="submit" value="확인" />
-        <input className="button-cancel" type="button" value="취소" />
+        <input
+          className="button-cancel"
+          type="button"
+          value="취소"
+          onClick={handleCancel}
+        />
       </form>
     </>
   );

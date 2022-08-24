@@ -107,7 +107,11 @@ function App() {
   };
 
   const authIndex = () => {
-    return auth ? amountButtonActive() : <AuthForm authControl={setAuth} />;
+    return auth ? (
+      amountButtonActive()
+    ) : (
+      <AuthForm authControl={setAuth} modeControl={setChangeMode} />
+    );
   };
 
   const amountButtonActive = () => {
