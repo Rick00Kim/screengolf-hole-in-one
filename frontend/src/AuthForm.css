@@ -36,9 +36,9 @@
 }
 
 /* Submit button css */
-.button-submit {
+.button-submit,
+.button-cancel {
   appearance: none;
-  background-color: #39bd5e;
   border: 1px solid rgba(27, 31, 35, 0.15);
   border-radius: 6px;
   box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
@@ -61,7 +61,16 @@
   white-space: nowrap;
 }
 
-.button-submit:focus:not(:focus-visible):not(.focus-visible) {
+.button-submit {
+  background-color: #39bd5e;
+}
+
+.button-cancel {
+  background-color: #bd4d39;
+}
+
+.button-submit:focus:not(:focus-visible):not(.focus-visible),
+.button-cancel:focus:not(:focus-visible):not(.focus-visible) {
   box-shadow: none;
   outline: none;
 }
@@ -70,8 +79,17 @@
   background-color: #2c974b;
 }
 
+.button-cancel:hover {
+  background-color: #943512;
+}
+
 .button-submit:focus {
   box-shadow: rgba(46, 164, 79, 0.4) 0 0 0 3px;
+  outline: none;
+}
+
+.button-cancel:focus {
+  box-shadow: rgba(155, 72, 24, 0.4) 0 0 0 3px;
   outline: none;
 }
 
@@ -82,10 +100,23 @@
   cursor: default;
 }
 
+.button-cancel:disabled {
+  background-color: #f33d18;
+  border-color: rgba(27, 31, 35, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  cursor: default;
+}
+
 .button-submit:active {
   background-color: #298e46;
   box-shadow: rgba(20, 70, 32, 0.2) 0 1px 0 inset;
 }
+
+.button-cancel:active {
+  background-color: #d02f1d;
+  box-shadow: rgba(20, 70, 32, 0.2) 0 1px 0 inset;
+}
+
 @media (min-width: 768px) {
   .title {
     font-size: calc(1.5rem + ((1vw - 7.68px) * 3.8611));
@@ -96,7 +127,8 @@
   .pass-input {
     font-size: calc(1.25rem + ((1vw - 7.68px) * 2.4306));
   }
-  .button-submit {
+  .button-submit,
+  .button-cancel {
     font-size: calc(1.25rem + ((1vw - 7.68px) * 1.7361));
     width: calc(8rem + ((1vw - 7.68px) * 8.1736));
     height: calc(3rem + ((1vw - 7.68px) * 3.3472));
@@ -113,7 +145,8 @@
   .pass-input {
     font-size: 48px;
   }
-  .button-submit {
+  .button-submit,
+  .button-cancel {
     font-size: 40px;
     width: 10em;
     height: 2.7em;

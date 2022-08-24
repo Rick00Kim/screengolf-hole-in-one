@@ -54,6 +54,7 @@ function AuthForm(props) {
           />
         </div>
         <input className="button-submit" type="submit" value="확인" />
+        <input className="button-cancel" type="button" value="취소" />
       </form>
     </>
   );
