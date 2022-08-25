@@ -38,6 +38,7 @@
 /* Submit button css */
 .button-submit,
 .button-cancel {
+  margin-right: 20px;
   appearance: none;
   border: 1px solid rgba(27, 31, 35, 0.15);
   border-radius: 6px;
@@ -130,7 +131,7 @@
   .button-submit,
   .button-cancel {
     font-size: calc(1.25rem + ((1vw - 7.68px) * 1.7361));
-    width: calc(8rem + ((1vw - 7.68px) * 8.1736));
+    width: calc(8rem + ((1vw - 7.68px) * 1.1736));
     height: calc(3rem + ((1vw - 7.68px) * 3.3472));
   }
 }
@@ -148,7 +149,7 @@
   .button-submit,
   .button-cancel {
     font-size: 40px;
-    width: 10em;
+    width: 7em;
     height: 2.7em;
   }
 }
