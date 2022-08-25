@@ -55,6 +55,7 @@ function AuthForm(props) {
             placeholder="비밀번호를 입력해주세요."
             value={password}
             required
+            inputmode="numeric"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
