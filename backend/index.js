@@ -6,7 +6,7 @@ const cors = require("cors");
 
 // Setting for CORS
 var corsOptions = {
-  origin: "http://localhost:8081",
+  origin: "http://frontend",
 };
 app.use(cors(corsOptions));
 
@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
 require("./modules/routes/hole.in.one.routes")(app);
 
 // Set port
-const PORT = process.env.PORT || 3300;
+const PORT = process.env.PORT || 5500;
 server.listen(PORT, () => {
   console.log(`listening on *:${PORT}`);
 });
