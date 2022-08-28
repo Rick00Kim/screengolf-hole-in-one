@@ -1,0 +1,41 @@
+version: "3.7"
+services:
+  nginx:
+    container_name: holeinone_server
+    image: nginx:1.15
+    ports:
+      - 15101:80
+    networks:
+      - holeinone-network
+    volumes:
+      - "../server_configs/server_nginx.conf:/etc/nginx/conf.d/default.conf"
+    depends_on:
+      - frontend
+      - backend
+
+  frontend:
+    container_name: holeinone_frontend
+    image: "${DOCKER_USER}/holeinone_frontend"
+    command: "npm run start"
+    environment:
+      REACT_APP_AUTH_KEY: "123"
+    tty: true
+    networks:
+      holeinone-network:
+
+  backend:
+    container_name: holeinone_backend
+    image: ${DOCKER_USER}/holeinone_backend
+    command: "npm run start"
+    environment:
+      DB_DATABASE: "${DATABASE_NAME}"
+      DB_USERNAME: "${DATABASE_USER}"
+      DB_PASSWORD: "${DATABASE_PASS}"
+    networks:
+      holeinone-network:
+
+networks:
+  holeinone-network:
+volumes:
+  mongodbdata:
+    driver: local
