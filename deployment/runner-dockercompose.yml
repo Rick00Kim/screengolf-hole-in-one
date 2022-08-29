@@ -28,6 +28,7 @@ services:
     image: ${DOCKER_USER}/holeinone_backend
     command: "npm run start"
     environment:
+      DB_HOSTNAME: "${DATABASE_HOST}"
       DB_DATABASE: "${DATABASE_NAME}"
       DB_USERNAME: "${DATABASE_USER}"
       DB_PASSWORD: "${DATABASE_PASS}"
