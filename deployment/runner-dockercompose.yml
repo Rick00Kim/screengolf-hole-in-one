@@ -35,6 +35,17 @@ services:
     networks:
       holeinone-network:
 
+  mongodb:
+    container_name: holeinone_db
+    image: "${DOCKER_USER}/holeinone_db"
+    restart: unless-stopped
+    volumes:
+      - mongodbdata:/docker-entrypoint-initdb.d/
+      - mongodbdata:/data/configdb/
+      - mongodbdata:/data/db/
+    networks:
+      holeinone-network:
+
 networks:
   holeinone-network:
 volumes:
