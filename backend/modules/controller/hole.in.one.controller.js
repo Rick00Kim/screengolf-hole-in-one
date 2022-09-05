@@ -91,7 +91,7 @@ exports.update = async (req, res) => {
   if (!targetPrizeData) {
     return res.status(404).send({
       result: "FAIL",
-      message: "Praice data is not found",
+      message: "Prize data is not found",
     });
   }
 
