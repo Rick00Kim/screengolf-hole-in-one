@@ -1,0 +1,39 @@
+name: holeinone_image_pusher
+
+# Trigger settings
+on:
+  push:
+    branches: [main]
+
+# Environment variables
+env:
+  DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+  DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+
+# Jobs
+jobs:
+  build-and-push-to-docker-hub: # job name
+    runs-on: ubuntu-latest
+    steps:
+      # Before action : checkout source code
+      - uses: actions/checkout@v2
+      # 1. Docker login using username and password
+      - name: docker login
+        run: |
+          echo "================ Docker Login ================"
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          echo "============ Docker Login SUCCESS ============"
+      # 2. Build using docker-compose file
+      - name: Build the Docker image
+        working-directory: ./deploy
+        run: |
+          echo "================ Build image ================"
+          docker-compose -f build-dockercompose.yml build
+          echo "============ Build image SUCCESS ============"
+      # 3. Push to dockerhub
+      - name: Docker Push
+        working-directory: ./deploy
+        run: |
+          echo "================ Push image ================"
+          docker-compose -f build-dockercompose.yml push
+          echo "=========== Push image SUCCESS ============="
