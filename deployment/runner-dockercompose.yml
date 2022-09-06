@@ -18,7 +18,7 @@ services:
     image: "${DOCKER_USER}/holeinone_frontend"
     command: "npm run start"
     environment:
-      REACT_APP_AUTH_KEY: "123"
+      REACT_APP_AUTH_KEY: ${FRONT_AUTH_KEY}
     tty: true
     networks:
       holeinone-network:
