@@ -25,14 +25,14 @@ jobs:
           echo "============ Docker Login SUCCESS ============"
       # 2. Build using docker-compose file
       - name: Build the Docker image
-        working-directory: ./deploy
+        working-directory: ./deployment
         run: |
           echo "================ Build image ================"
           docker-compose -f build-dockercompose.yml build
           echo "============ Build image SUCCESS ============"
       # 3. Push to dockerhub
       - name: Docker Push
-        working-directory: ./deploy
+        working-directory: ./deployment
         run: |
           echo "================ Push image ================"
           docker-compose -f build-dockercompose.yml push
