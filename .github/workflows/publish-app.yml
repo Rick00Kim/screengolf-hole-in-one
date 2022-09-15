@@ -12,7 +12,7 @@ on:
 
 # Jobs
 jobs:
-  publish-to-oci: # job name
+  publish-to-oci:
     runs-on: ubuntu-latest
     steps:
       # Before action : checkout source code

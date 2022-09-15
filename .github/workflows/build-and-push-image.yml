@@ -12,7 +12,7 @@ env:
 
 # Jobs
 jobs:
-  build-and-push-to-docker-hub: # job name
+  build-and-push-to-docker-hub:
     runs-on: ubuntu-latest
     steps:
       # Before action : checkout source code
