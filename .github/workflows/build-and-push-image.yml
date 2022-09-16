@@ -26,13 +26,13 @@ jobs:
       # 2. Write environment file
       - name: "Create and write environment file"
         run: |
-          cd ./deployment
           echo "DOCKER_USER=${{secret.DOCKER_USER}}" >> .env
           echo "DATABASE_NAME=${{secret.DB_NAME}}" >> .env
           echo "DATABASE_USER=${{secret.DB_USER}}" >> .env
           echo "DATABASE_PASS=${{secret.DB_PASS}}" >> .env
           echo "MONGO_INIT_USER=${{secret.DB_INIT_USER}}" >> .env
           echo "MONGO_INIT_PASS=${{secret.DB_INIT_PASS}}" >> .env
+          mv -v .env ./deployment/
       # 2. Build using docker-compose file
       - name: Build the Docker image
         working-directory: ./deployment
