@@ -1,10 +1,8 @@
 name: holeinone_publisher
 
-# Trigger settings
 on:
   # Depends on workflow
   workflow_run:
-    # Details
     workflows: ["holeinone_image_pusher"]
     branches: [main]
     types:

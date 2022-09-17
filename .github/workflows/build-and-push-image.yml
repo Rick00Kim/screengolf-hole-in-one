@@ -1,6 +1,5 @@
 name: holeinone_image_pusher
 
-# Trigger settings
 on:
   push:
     branches: [main]
