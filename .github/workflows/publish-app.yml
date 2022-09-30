@@ -13,7 +13,7 @@ jobs:
   publish-to-oci:
     runs-on: ubuntu-latest
     steps:
-      # Before action : checkout source code
+      # Action : checkout source code
       - uses: actions/checkout@v2
       # 1. Write settings for OCI
       - name: "Write Config(For OCI)"
