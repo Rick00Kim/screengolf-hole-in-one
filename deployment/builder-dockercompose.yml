@@ -12,8 +12,3 @@ services:
       context: ../backend
       dockerfile: Dockerfile
 
-  mongodb:
-    image: "${DOCKER_USER}/holeinone_db"
-    build:
-      context: ../db
-      dockerfile: Dockerfile
