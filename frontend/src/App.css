@@ -212,7 +212,7 @@
     font-size: calc(2rem + ((1vw - 0.48em) * 7.3333));
   }
   .event-amount {
-    font-size: calc(7rem + ((1vw - 7.68px) * 25.7778));
+    font-size: calc(5rem + ((1vw - 7.68px) * 25.7778));
   }
 
   .button-increase,
