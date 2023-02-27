@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
 require("./modules/routes/hole.in.one.routes")(app)
 
 // Set port
-const PORT = process.env.PORT || 5500;
+const PORT = process.env.PORT || 5500
 server.listen(PORT, () => {
   console.log(`listening on *:${PORT}`)
 })

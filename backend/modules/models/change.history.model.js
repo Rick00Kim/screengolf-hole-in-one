@@ -9,6 +9,6 @@ module.exports = (mongoose) => {
       },
       { timestamps: true }
     )
-  );
-  return ChangeHistory;
-};
+  )
+  return ChangeHistory
+}
