@@ -37,11 +37,17 @@ services:
 
   mongodb:
     container_name: holeinone_db
-    image: "${DOCKER_USER}/holeinone_db"
+    build:
+      context: ../db
+      dockerfile: Dockerfile
     restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_INIT_USER}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_INIT_PASS}"
+      TARGET_DATABASE: "${DATABASE_NAME}"
+      TARGET_USERNAME: "${DATABASE_USER}"
+      TARGET_PASSWORD: "${DATABASE_PASS}"
     volumes:
-      - mongodbdata:/docker-entrypoint-initdb.d/
-      - mongodbdata:/data/configdb/
       - mongodbdata:/data/db/
     networks:
       holeinone-network:
