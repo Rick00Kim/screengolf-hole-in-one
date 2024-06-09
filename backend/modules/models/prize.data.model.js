@@ -11,6 +11,6 @@ module.exports = (mongoose) => {
       },
       { timestamps: true }
     )
-  )
-  return Price
-}
+  );
+  return Price;
+};

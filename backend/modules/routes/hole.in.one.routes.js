@@ -1,15 +1,15 @@
-const validators = require("../utilities/hole.in.one.validators")
-const CommonValidate = validators.CommonValidate
-const ParamIdValidationRules = validators.ParamIdValidationRules
-const CreateValidationRule = validators.CreateValidationRule
-const ModifyValidationRules = validators.ModifyValidationRules
+const validators = require("../utilities/hole.in.one.validators");
+const CommonValidate = validators.CommonValidate;
+const ParamIdValidationRules = validators.ParamIdValidationRules;
+const CreateValidationRule = validators.CreateValidationRule;
+const ModifyValidationRules = validators.ModifyValidationRules;
 
 module.exports = (app) => {
   // Import Order controller
-  const holeInOneController = require("../controller/hole.in.one.controller.js")
+  const holeInOneController = require("../controller/hole.in.one.controller.js");
 
   // Define router
-  var router = require("express").Router()
+  var router = require("express").Router();
 
   // Create a new holeInOne data
   router.post(
@@ -17,13 +17,13 @@ module.exports = (app) => {
     CreateValidationRule(),
     CommonValidate,
     holeInOneController.create
-  )
+  );
 
   // Retrieve all holeInOne datas.
-  router.get("/", holeInOneController.findAll)
+  router.get("/", holeInOneController.findAll);
 
   // Find a latest holeInOne data.
-  router.get("/latest", holeInOneController.findLatest)
+  router.get("/latest", holeInOneController.findLatest);
 
   // Find a specific holeInOne data with an id
   router.get(
@@ -31,7 +31,7 @@ module.exports = (app) => {
     ParamIdValidationRules(),
     CommonValidate,
     holeInOneController.findOne
-  )
+  );
 
   // Update a holeInOne data with id
   router.put(
@@ -39,7 +39,7 @@ module.exports = (app) => {
     ModifyValidationRules(),
     CommonValidate,
     holeInOneController.update
-  )
+  );
 
   // Confirm a specific Prize data
   router.put(
@@ -47,7 +47,7 @@ module.exports = (app) => {
     ParamIdValidationRules(),
     CommonValidate,
     holeInOneController.confirm
-  )
+  );
 
-  app.use("/api/hole-in-one", router)
-}
+  app.use("/api/hole-in-one", router);
+};
