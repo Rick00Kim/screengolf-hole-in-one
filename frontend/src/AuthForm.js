@@ -1,46 +1,46 @@
-import * as React from "react"
-import "./AuthForm.css"
+import * as React from "react";
+import "./AuthForm.css";
 
 function AuthForm(props) {
   // Controller from parent
-  const { authControl, modeControl } = props
+  const { authControl, modeControl } = props;
 
   // React States
-  const [errorMessages, setErrorMessages] = React.useState({})
-  const [password, setPassword] = React.useState("")
+  const [errorMessages, setErrorMessages] = React.useState({});
+  const [password, setPassword] = React.useState("");
 
   // Auth Login info
   const database = {
     password: process.env.REACT_APP_AUTH_KEY,
-  }
+  };
 
   const errors = {
     password: "관리자 비밀번호가 다릅니다.",
-  }
+  };
 
   const handleCancel = () => {
-    authControl(false)
-    modeControl(false)
-  }
+    authControl(false);
+    modeControl(false);
+  };
 
   const handleSubmit = (event) => {
     //Prevent page reload
-    event.preventDefault()
+    event.preventDefault();
 
     if (database.password !== password) {
       // Invalid password
-      setPassword("")
-      setErrorMessages({ name: "password", message: errors.password })
+      setPassword("");
+      setErrorMessages({ name: "password", message: errors.password });
     } else {
-      authControl(true)
+      authControl(true);
     }
-  }
+  };
 
   // Generate JSX code for error message
   const renderErrorMessage = (name) =>
     name === errorMessages.name && (
       <div className="error">{errorMessages.message}</div>
-    )
+    );
 
   return (
     <>
@@ -68,7 +68,7 @@ function AuthForm(props) {
         />
       </form>
     </>
-  )
+  );
 }
 
-export default AuthForm
+export default AuthForm;
