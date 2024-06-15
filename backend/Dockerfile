@@ -16,3 +16,5 @@ RUN npm install --silent
 ADD . /app
 
 RUN chown -R node:node /app
+
+CMD ["npm", "start"]
