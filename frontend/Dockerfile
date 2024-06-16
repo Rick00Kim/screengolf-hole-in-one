@@ -8,13 +8,10 @@ WORKDIR /app
 
 ENV PATH /app/node_modules/.bin:$PATH
 
-COPY package.json /app/package.json
-COPY package-lock.json /app/package-lock.json
-RUN npm install
-RUN npm install react-scripts -g
+RUN npm i -g serve --silent
 
-ADD . /app
+ADD ./build /app
 
 RUN chown -R node:node /app
 
-CMD ["npm", "start"]
+CMD ["npx", "serve", "-p", "3000"]

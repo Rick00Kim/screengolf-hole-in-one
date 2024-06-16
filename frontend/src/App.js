@@ -5,6 +5,8 @@ import axios from "axios";
 import { backendResultCodes } from "./Constants";
 import "./App.css";
 
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+
 function App() {
   const [auth, setAuth] = React.useState(false);
   const [changeMode, setChangeMode] = React.useState(false);
