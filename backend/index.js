@@ -3,10 +3,31 @@ const app = express();
 const http = require("http");
 const server = http.createServer(app);
 const cors = require("cors");
+const { allowOrigins } = require("./modules/configs/constants");
 
 // Setting for CORS
-var corsOptions = {
-  origin: "http://frontend",
+let corsOptions = {
+  origin: function (origin, callback) {
+    if (origin === "http://localhost:3000") {
+      callback(null, true);
+    } else if (allowOrigins.indexOf(origin) !== -1 || !origin) {
+      console.info("origin", origin);
+      console.info("allowOrigins", allowOrigins);
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "X-Requested-With",
+    "X-HTTP-Method-Override",
+    "Accept",
+  ],
 };
 app.use(cors(corsOptions));
 
