@@ -1,4 +1,4 @@
-const validators = require("../utilities/hole.in.one.validators");
+const validators = require("../utilities/hole.in.one.validators.js");
 const CommonValidate = validators.CommonValidate;
 const ParamIdValidationRules = validators.ParamIdValidationRules;
 const CreateValidationRule = validators.CreateValidationRule;
@@ -12,12 +12,7 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   // Create a new holeInOne data
-  router.post(
-    "/",
-    CreateValidationRule(),
-    CommonValidate,
-    holeInOneController.create
-  );
+  router.post("/", CreateValidationRule(), CommonValidate, holeInOneController.create);
 
   // Retrieve all holeInOne datas.
   router.get("/", holeInOneController.findAll);
@@ -26,28 +21,13 @@ module.exports = (app) => {
   router.get("/latest", holeInOneController.findLatest);
 
   // Find a specific holeInOne data with an id
-  router.get(
-    "/:id",
-    ParamIdValidationRules(),
-    CommonValidate,
-    holeInOneController.findOne
-  );
+  router.get("/:id", ParamIdValidationRules(), CommonValidate, holeInOneController.findOne);
 
   // Update a holeInOne data with id
-  router.put(
-    "/:id",
-    ModifyValidationRules(),
-    CommonValidate,
-    holeInOneController.update
-  );
+  router.put("/:id", ModifyValidationRules(), CommonValidate, holeInOneController.update);
 
   // Confirm a specific Prize data
-  router.put(
-    "/:id/confirm",
-    ParamIdValidationRules(),
-    CommonValidate,
-    holeInOneController.confirm
-  );
+  router.put("/:id/confirm", ParamIdValidationRules(), CommonValidate, holeInOneController.confirm);
 
   app.use("/api/hole-in-one", router);
 };

@@ -21,13 +21,7 @@ let corsOptions = {
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   preflightContinue: false,
   optionsSuccessStatus: 204,
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "X-Requested-With",
-    "X-HTTP-Method-Override",
-    "Accept",
-  ],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "X-HTTP-Method-Override", "Accept"],
 };
 app.use(cors(corsOptions));
 
