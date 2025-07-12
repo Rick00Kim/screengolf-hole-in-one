@@ -3,7 +3,7 @@ const app = express();
 const http = require("http");
 const server = http.createServer(app);
 const cors = require("cors");
-const { allowOrigins } = require("./modules/configs/constants");
+const { allowOrigins } = require("./src/configs/constants");
 
 // Setting for CORS
 let corsOptions = {
@@ -31,7 +31,7 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-const db = require("./modules/models");
+const db = require("./src/models");
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
@@ -51,7 +51,7 @@ app.get("/", (req, res) => {
 });
 
 // Import routes
-require("./modules/routes/hole.in.one.routes")(app);
+require("./src/routes/hole.in.one.routes")(app);
 
 // Set port
 const PORT = process.env.PORT || 5500;
